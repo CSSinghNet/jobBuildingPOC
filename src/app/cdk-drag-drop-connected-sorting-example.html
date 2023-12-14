@@ -1,0 +1,45 @@
+<dialog-overview-example class="mb-10" (onNewJobInsert)="AddJObs($event)"
+  >Add Jobs</dialog-overview-example
+>
+<div
+  cdkDropList
+  class="example-list border"
+  [cdkDropListData]="jobs"
+  (cdkDropListDropped)="dropJobs($event)"
+>
+  <div class="d-flex fd-column gap-10" cdkDropListGroup>
+    <div class="example-box border-new-job" *ngFor="let job of jobs" cdkDrag>
+      <span *ngIf="job.jobId>0" class="
+          example-box-title
+          mb-10
+          d-flex
+          align-center
+          gap-10
+        "> <mat-icon (click)="onDeleteJob(job.jobId)"  aria-hidden="false"
+          aria-label="Example home icon" fontIcon="delete">Name</mat-icon>
+          <span *ngIf="!job.isDummy">
+          {{job.jobName}}
+        </span>
+        </span>
+      <div
+        cdkDropList
+        #todoList="cdkDropList"
+        [cdkDropListData]="job.positions"
+        class="example-list border"
+        (cdkDropListDropped)="drop($event)"
+        [cdkDropListSortPredicate]="sortPredicate"
+      >
+        <div
+          class="example-box border parent-pos-{{pos.parentPaketId}}"
+          *ngFor="let pos of job.positions"
+          [cdkDragData]="pos"
+          (cdkDragStarted)="dragStarted($event)"
+          (cdkDragReleased)="dragReleased($event)"
+          cdkDrag
+        >
+          <div class="grey">{{pos.name}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
