@@ -80,6 +80,10 @@ example-list-parent {
   border-radius: 4px;
 }
 
+.border-green {
+  border: solid 2px green !important;
+}
+
 .border-new-job:not(:last-child) {
   border: solid 1px red;
   border-radius: 4px;

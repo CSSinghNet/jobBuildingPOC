@@ -187,6 +187,8 @@ export class CdkDragDropConnectedSortingExample {
 
         // const sort = [...event.container.data].sort(sortByPositionId);
         // event.container.data=sort;
+
+        console.log(event.container.data);
       } else {
         const isValid = this.isValidJobMove(
           event.container.data,
@@ -208,6 +210,10 @@ export class CdkDragDropConnectedSortingExample {
   }
 
   dragStarted(event: any): void {
+    let currentelement: any = document.getElementById(
+      `pos-${event.source.data.positionId}`
+    );
+    currentelement.classList.add('border-green');
     if (event.source.data.type !== 'pkt') return;
     let childs: any = document.getElementsByClassName(
       `parent-pos-${event.source.data.positionId}`
@@ -218,15 +224,18 @@ export class CdkDragDropConnectedSortingExample {
   }
 
   dragReleased(event: any): void {
-    if (event.source.data.type !== 'pkt') return;
+    let currentelement: any = document.getElementById(
+      `pos-${event.source.data.positionId}`
+    );
     setTimeout(() => {
+      currentelement.classList.remove('border-green');
       let childs: any = document.getElementsByClassName(
         `parent-pos-${event.source.data.positionId}`
       );
       for (let i = 0; i < childs.length; i++) {
         childs[i]['style']['border'] = '1px solid #ccc';
       }
-    }, 2000);
+    }, 1000);
   }
 
   dropJobs(event: any) {
